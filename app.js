@@ -2,10 +2,12 @@ var express = require('express');
 var app = express();
 var mongoose = require('mongoose');
 var request = require('request');
-var url = 'mongodb://localhost:27017/test'; 
-var apiKey = '2504605-2db2d605ce38adf49a51d2241';
+//var url = 'mongodb://localhost:27017/test'; 
+
 ////url hidden according to the wiki
-//var dburl = process.env.MONGOLAB_URI; //https://github.com/FreeCodeCamp/FreeCodeCamp/wiki/Using-MongoDB-And-Deploying-To-Heroku
+var url = process.env.MONGOLAB_URI;
+var apiKey = process.env.apiKey;
+//https://github.com/FreeCodeCamp/FreeCodeCamp/wiki/Using-MongoDB-And-Deploying-To-Heroku
 ////SET MONGOLAB_URI="mongodb://username:password@ds01316.mlab.com:1316/food" The quotes are wrong (the correct format is without the quotes)
 
 console.log(url);
@@ -41,6 +43,7 @@ app.get('/api/latest/imagesearch', function(req, res){
         }));
 });
 });
+
 
 app.get('/api/imagesearch/:querry', function(req,res){
     var querrystr = req.params.querry;   //<-- Attentionhttp://stackoverflow.com/questions/17007997/how-to-access-the-get-parameters-after-in-express
