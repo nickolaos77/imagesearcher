@@ -10,7 +10,7 @@ var apiKey = process.env.apiKey;
 //https://github.com/FreeCodeCamp/FreeCodeCamp/wiki/Using-MongoDB-And-Deploying-To-Heroku
 ////SET MONGOLAB_URI="mongodb://username:password@ds01316.mlab.com:1316/food" The quotes are wrong (the correct format is without the quotes)
 
-console.log(url);
+//console.log(url);
 mongoose.connect(url); //mlab db url
 
 var Schema = mongoose.Schema;
