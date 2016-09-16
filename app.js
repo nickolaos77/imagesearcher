@@ -35,7 +35,7 @@ function saveData(term, date, timestamp){
 
 app.get('/api/latest/imagesearch', function(req, res){
    // http://stackoverflow.com/questions/5830513/how-do-i-limit-the-number-of-returned-items
-        image.find().sort('timestamp').limit(10)    // sorting the results   
+        image.find().sort('-date').limit(10)    // sorting the results   
         .then(function(doc){
         res.send( {items:doc}.items.map(function(obj){
             var rObj = {};
