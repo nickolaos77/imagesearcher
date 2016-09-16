@@ -17,7 +17,8 @@ var Schema = mongoose.Schema;
 var PORT = process.env.PORT || 3000; //for deploying in heroku
 var imageSchema = new Schema({ //replace urlData with image
     searchterm: String,
-    time:String
+    time:String,
+    timestamp:Number
 });
 
 var image = mongoose.model('image', imageSchema ); 
@@ -34,7 +35,7 @@ function saveData(term, date, timestamp){
 
 app.get('/api/latest/imagesearch', function(req, res){
    // http://stackoverflow.com/questions/5830513/how-do-i-limit-the-number-of-returned-items
-        image.find().sort('timestamp').sort(function (a, b) {  return a - b;  }).limit(10)    // sorting the results   
+        image.find().sort('timestamp').limit(10)    // sorting the results   
         .then(function(doc){
         res.send( {items:doc}.items.map(function(obj){
             var rObj = {};
