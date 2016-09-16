@@ -17,17 +17,16 @@ var Schema = mongoose.Schema;
 var PORT = process.env.PORT || 3000; //for deploying in heroku
 var imageSchema = new Schema({ //replace urlData with image
     searchterm: String,
-    time:String,
-    timestamp:Number
+    time:String
 });
 
 var image = mongoose.model('image', imageSchema ); 
 
-function saveData(term, date, timestamp){
+function saveData(term, date){
         var item = {
         searchterm:term,
         time:date,
-        timestamp:timestamp}
+       }
         var data = new image(item);
         data.save();
         console.log('data saved');
@@ -40,7 +39,7 @@ app.get('/api/latest/imagesearch', function(req, res){
         res.send( {items:doc}.items.map(function(obj){
             var rObj = {};
             rObj['searchterm'] = obj.searchterm;
-            rObj['time'] = obj.time.slice(0,24);
+            rObj['time'] = obj.time;
             return rObj;
         }));
 });
@@ -78,9 +77,9 @@ app.get('/api/imagesearch/:querry', function(req,res){
         res.send(results);}
         console.log(new Date().toISOString());   
         var adate = new Date().toISOString();
-        var atimestamp = new Date().getTime();
+        
     }
-     saveData(querrystr,adate, atimestamp);   
+     saveData(querrystr,adate);   
 })
 
 });
