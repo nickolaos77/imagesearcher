@@ -22,10 +22,11 @@ var imageSchema = new Schema({ //replace urlData with image
 
 var image = mongoose.model('image', imageSchema ); 
 
-function saveData(term, date){
+function saveData(term, date, timestamp){
         var item = {
         searchterm:term,
-        time:date}
+        time:date,
+        timestamp:timestamp}
         var data = new image(item);
         data.save();
         console.log('data saved');
@@ -33,7 +34,7 @@ function saveData(term, date){
 
 app.get('/api/latest/imagesearch', function(req, res){
    // http://stackoverflow.com/questions/5830513/how-do-i-limit-the-number-of-returned-items
-        image.find().sort('-time').limit(10)    // sorting the results   
+        image.find().sort('timestamp').limit(10)    // sorting the results   
         .then(function(doc){
         res.send( {items:doc}.items.map(function(obj){
             var rObj = {};
@@ -76,8 +77,9 @@ app.get('/api/imagesearch/:querry', function(req,res){
         res.send(results);}
         console.log(new Date().toString());   
         var adate = new Date().toString();
+        var atimestamp = new Date().getTime();
     }
-     saveData(querrystr,adate);   
+     saveData(querrystr,adate, atimestamp);   
 })
 
 });
